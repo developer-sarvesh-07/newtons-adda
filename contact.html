@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Newton's Adda | THe Success Stair</title>
+     <title>My Website</title>
+  <link rel="icon" type="jpg" href="yogi.jpg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Slab:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo-container">
+                <img src="yogi.jpg" alt="Newton's Adda" class="logo">
+                <div class="logo-text">
+                    <h1>Newton's Adda</h1>
+                    <p>The Success Stair</p>
+                </div>
+            </div>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="classes.html">Classes</a>
+                <a href="testimonials.html">Testimonials</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+              <!----  <a href="login.html" class="login-button">Login</a> -->
+            </nav>
+        </div>
+    </header>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Get In Touch</h2>
+            </div>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Contact Information</h3>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h4>Address</h4>
+                                <p>123 Govindpur, teliyarganj, prayagraj, UP, India</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div>
+                                <h4>Phone</h4>
+                                <p>+91 6387195465</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4>Email</h4>
+                            <p>newtonsadda@gmail.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div>
+                                <h4>Working Hours</h4>
+                                <p>Monday-Saturday: 9AM - 7PM<br>Sunday: 10AM - 2PM</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h3 style="margin-top: 30px;">Follow Us</h3>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/profile.php?id=100091583633830" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/newtons_adda?igsh=aWtsODhhbmhyNTR2" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.youtube.com/@newtonsadda" class="social-link"><i class="fab fa-youtube"></i></a>
+                        <a href="https://chat.whatsapp.com/CySjS1ENZa040vsfYL1jfZ" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+<div class="contact-form">
+    <form id="contactForm" onsubmit="submitForm(event)">
+        <div class="form-group">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone">
+        </div>
+    
+        <div class="form-group">
+            <label for="class">Class/Program Interested In</label>
+            <select id="class" name="program">
+                <option value="">Select an option</option>
+                <option value="9-10">Class 9-10 Foundation Program</option>
+                <option value="11-12">Class 11-12 Advanced Program</option>
+                <option value="other">Other</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="message">Your Message</label>
+            <textarea id="message" name="message" required></textarea>
+        </div>
+        
+        <button type="submit" class="submit-button">Send Message</button>
+    </form>
+    <div id="responseMessage" style="display:none; margin-top:20px;"></div>
+</div>
+
+<script>
+async function submitForm(event) {
+  event.preventDefault();
+  const form = event.target;
+  const submitButton = form.querySelector('button[type="submit"]');
+  const responseDiv = document.getElementById('responseMessage');
+  
+  submitButton.disabled = true;
+  submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+  responseDiv.style.display = 'none';
+
+  try {
+    const formData = {
+      name: form.querySelector('#name').value.trim(),
+      email: form.querySelector('#email').value.trim(),
+      phone: form.querySelector('#phone').value.trim(),
+      program: form.querySelector('#class').value,
+      message: form.querySelector('#message').value.trim(),
+      timestamp: new Date().toISOString() // Add timestamp
+    };
+
+    if (!formData.name || !formData.email) {
+      throw new Error('Please fill in all required fields');
+    }
+
+    const webAppUrl = 'https://script.google.com/macros/s/AKfycbzH3fLFMP6EofSMtDFouiEvzeYa-CMANxYwWMeO3OtlRwV8TRTtUU5dpfgSwjeo277c/exec';
+
+    const response = await fetch(webAppUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData)
+    });
+
+    if (!response.ok) {
+      throw new Error('Server responded with error');
+    }
+
+    const result = await response.json();
+    if (result.result !== "success") {
+      throw new Error(result.message || 'Submission failed');
+    }
+
+    responseDiv.innerHTML = '<i class="fas fa-check-circle"></i> Message sent successfully! We will contact you soon.';
+    responseDiv.style.color = 'green';
+    form.reset();
+
+  } catch (error) {
+    console.error("Error:", error);
+    responseDiv.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${error.message}`;
+    responseDiv.style.color = 'red';
+  } finally {
+    responseDiv.style.display = 'block';
+    submitButton.disabled = false;
+    submitButton.textContent = 'Send Message';
+  }
+}
+</script>
+<style>
+/* Add this to your CSS for better feedback */
+.success-animation {
+  animation: pulse-green 2s;
+}
+
+@keyframes pulse-green {
+  0% { box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(40, 167, 69, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(40, 167, 69, 0); }
+}
+</style>
+</body>
+</html>
