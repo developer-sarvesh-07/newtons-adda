@@ -1,0 +1,44 @@
+User-agent: *
+Allow: /
+
+# Disallow private areas
+Disallow: /dashboard.html
+Disallow: /admin/
+Disallow: /private/
+Disallow: /temp/
+Disallow: /*.temp$
+
+# Allow important pages
+Allow: /index.html
+Allow: /about.html
+Allow: /classes.html
+Allow: /testimonials.html
+Allow: /contact.html
+Allow: /assets/
+Allow: /css/
+Allow: /js/
+
+# Sitemap location
+Sitemap: https://newtonsadda.com/sitemap.xml
+
+# Crawl delay (optional - helps prevent server overload)
+Crawl-delay: 1
+
+# Specific rules for search engines
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Block spam bots
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
