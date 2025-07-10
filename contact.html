@@ -148,7 +148,7 @@
     <div id="responseMessage" style="display:none; margin-top:20px;"></div>
 </div>
 
-<script>
+<!--<script>
 async function submitForm(event) {
   event.preventDefault();
   const form = event.target;
@@ -206,6 +206,78 @@ async function submitForm(event) {
     submitButton.textContent = 'Send Message';
   }
 }
+</script>-->
+                <script>
+async function submitForm(event) {
+  event.preventDefault();
+  const form = event.target;
+  const submitButton = form.querySelector('button[type="submit"]');
+  const responseDiv = document.getElementById('responseMessage');
+  
+  submitButton.disabled = true;
+  submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+  responseDiv.style.display = 'none';
+
+  try {
+    const formData = {
+      name: form.querySelector('#name').value.trim(),
+      email: form.querySelector('#email').value.trim(),
+      phone: form.querySelector('#phone').value.trim(),
+      program: form.querySelector('#class').value,
+      message: form.querySelector('#message').value.trim(),
+      timestamp: new Date().toISOString()
+    };
+
+    if (!formData.name || !formData.email) {
+      throw new Error('Please fill in all required fields');
+    }
+
+    const webAppUrl = 'https://script.google.com/macros/s/AKfycbzH3fLFMP6EofSMtDFouiEvzeYa-CMANxYwWMeO3OtlRwV8TRTtUU5dpfgSwjeo277c/exec';
+
+    // Add cache-busting parameter
+    const urlWithCacheBust = webAppUrl + '?cache=' + new Date().getTime();
+
+    const response = await fetch(urlWithCacheBust, {
+      method: 'POST',
+      mode: 'no-cors', // Important for Apps Script
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData)
+    });
+
+    // With 'no-cors' mode, we can't read the response, so we'll assume success
+    responseDiv.innerHTML = '<i class="fas fa-check-circle"></i> Message sent successfully! We will contact you soon.';
+    responseDiv.style.color = 'green';
+    form.reset();
+
+  }
+   
+  catch (error) {
+    console.error("Error:", error);
+    responseDiv.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${error.message || 'Message sent! If you don\'t hear back, please contact us directly.'}`;
+    responseDiv.style.color = 'red';
+  } finally {
+    responseDiv.style.display = 'block';
+    submitButton.disabled = false;
+    submitButton.textContent = 'Send Message';
+  }
+}
+fetch('https://script.google.com/macros/s/AKfycbzH3fLFMP6EofSMtDFouiEvzeYa-CMANxYwWMeO3OtlRwV8TRTtUU5dpfgSwjeo277c/exec', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(yourData),
+  redirect: 'follow'  // Important for Apps Script
+})
+.then(response => {
+  if (!response.ok) throw new Error('Network response was not ok');
+  return response.json();
+})
+.catch(error => {
+  console.error('Error:', error);
+});
 </script>
 <style>
 /* Add this to your CSS for better feedback */
